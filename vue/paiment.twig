@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+{% block contenu %}
+<h1>Votre total est de {{ order[0]['total']|number_format(2,',')}} €</h1>
+
+<a href="index.php?page=PDFPaiment&order_id={{order[0]['id']}}&paiement=paypal" onclick="ouvrirAutreSite({{order[0]['id']}})" class="btn btn-primary" >Payer par Paypal</a>
+
+<a href="index.php?page=PDFPaiment&order_id={{order[0]['id']}}&paiement=cheque" class="btn btn-primary">Payer par cheque</a>
+
+{% endblock %}

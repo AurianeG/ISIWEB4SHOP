@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+{% block contenu %}
+	<h1>Inscription</h1>
+	<form action="" method="post">
+		<label for="username" class="form-label">Nom d'utilisateur</label>
+		<input type="text" name="username" id="username" value="" class="form-control"/><br>
+
+		<label for="password" class="form-label">Mot de passe</label>
+		<input type="password" name="password" id="password" value="" class="form-control" /><br>
+
+		<label for="forname" class="form-label">Prénom</label>
+		<input type="text" name="forname" id="forname" value="" class="form-control" /><br>
+
+		<label for="surname" class="form-label">Nom</label>
+		<input type="text" name="surname" id="surname" value="" class="form-control" /><br>
+
+		<label for="phone" class="form-label">Téléphone</label>
+		<input type="text" name="phone" id="phone" value="" class="form-control" /><br>
+
+		<label for="email" class="form-label">Adresse Email</label>
+		<input type="text" name="email" id="email" value="" class="form-control"/><br>
+
+		<input type="submit" value="Inscription"class="btn btn-primary" />	<a class="btn btn-primary" href="index.php?page=connexion">Connexion</a>
+		{% if error is defined %}
+			<div class="error">
+				<p>{{ error }}</p>
+			</div>
+		{% endif %}
+
+	</form>
+
+
+		
+
+{% endblock %}

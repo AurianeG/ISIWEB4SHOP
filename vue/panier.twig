@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+{% block contenu %}
+<h1>Panier</h1>
+<p>Votre panier contient {{panier|length}} articles</p>
+
+{% for item in panier %}
+    <div class="row align-items-center">
+        <div class="col-md-2">
+            <img src={{"data/img/#{item.image}"}} alt="" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <p>{{item.name}}</p>
+        </div>
+        <div class="col-md-2">
+            <p>{{item.price}} €</p>
+        </div>
+        <div class="col-md-1">
+            <p>x {{item.quantity}}</p>
+        </div>
+        <div class="col-md-1">
+            <a href="index.php?page=panier&supprimer={{ item.id }}" class="btn btn-danger">X</a>
+        </div>
+    </div>
+{% endfor %}
+
+{% if panier|length > 0 %}
+<p>Total : {{total|number_format(2,',')}} €</p>
+<a href="index.php?page=adresse&order_id={{panier[0]['order_id']}}" class="btn btn-primary" >Valider mon panier</a>
+{% endif %}
+
+{% endblock %}
+

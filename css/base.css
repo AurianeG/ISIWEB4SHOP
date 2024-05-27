@@ -1,0 +1,44 @@
+
+body{
+    margin: 0px;
+}
+header {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    margin: 0px;
+    text-align: center;
+    font-size: 20px;
+}
+
+div.container{
+    display: flex;
+    padding: auto;
+}
+
+div.contenu{
+    padding: 10px;
+}
+
+nav{
+    background-color: lightGray;
+    color: black;
+    padding: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+    flex:25%;
+    max-width: 20%;
+    height: 100%;
+}
+
+nav a{
+    color: black;
+    text-decoration: none;
+}
+
+nav a:hover{
+    color: white;
+    background-color: darkgray;
+    border-radius: 4px;
+    padding: 5px;
+}

@@ -1,0 +1,42 @@
+{% extends "base.html.twig" %}
+{% block contenu %}
+	<h1>Offre de
+		{{type}}
+		:</h1>
+		{% for item in offre %}
+			
+			<div class="card mb-3" style="max-width: 540px;">
+			<div class="row g-0">
+				<div class="col-md-4">
+				<img src={{"data/img/#{item.image}"}} class="img-fluid rounded-start" alt="img">
+				</div>
+					<div class="col-md-8">
+					<div class="card-body">
+						<h5 class="card-title"><a href="index.php?page=ficheProduit&id={{item.id}}">{{ item.name }}</a></h5>
+						<p class="card-text">{{ item.description }}</p>
+						<p class="card-text"><small class="text-body-secondary">Prix : {{ item.price }}€</small></p>
+						<form action="index.php?page=offre&id={{ id }}&ajouter_id={{ item.id }}" method="post">
+							<select name="quantite" id="quantite">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>	
+								<option value="4">4</option>	
+								<option value="5">5</option>	
+								<option value="6">6</option>	
+								<option value="7">7</option>	
+								<option value="8">8</option>	
+								<option value="9">9</option>	
+								<option value="10">10</option>
+							</select>
+							<button type='submit' class="btn btn-primary" >
+								Acheter
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+			</div>
+		{% endfor %}
+		
+
+{% endblock %}

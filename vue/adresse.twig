@@ -1,0 +1,72 @@
+{% extends "base.html.twig" %}
+{% block contenu %}
+<h1>Votre total est de {{ order.total |number_format(2,',') }} €</h1>
+
+{% if adresses is null %}
+    <p>Vous n'avez pas encore renseigné d'adresse.</p>
+    <form method="post" action="index.php?page=paiment&order_id={{order.id}}">
+        <div class="mb-3">
+            <input type ="text" name="nom" placeholder="Nom">
+        </div>
+        <div class="mb-3">
+            <input type ="text" name="prenom" placeholder="Prénom">
+        </div>
+        <div class="mb-3">
+            <input type ="text" name="numNomRue" placeholder="N° et nom de la rue">
+        </div>
+        <div class="mb-3">
+            <input type ="text" name="compl" placeholder="Complement d'adresse">
+            </div>
+        <div class="mb-3">
+            <input type ="text" name="cp" placeholder="Code postal">
+        </div>
+        <div class="mb-3">
+            <input type ="text" name="ville" placeholder="Ville">
+        </div>
+        <div class="mb-3">
+            <input type ="text" name="pays" placeholder="Pays">
+        </div>
+        <input type="submit" value="Valider" class="btn btn-primary">
+    </form>
+{% else %}
+    <p>Vos adresses de livraison sont : 
+    <form method="post" action="index.php?page=paiment&order_id={{order.id}}">
+        <select name="adresse">
+            {% for adresse in adresses %}
+                <option value="{{ adresse.id }}">{{ adresse.add }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Choisir cette adresse" class="btn btn-primary">
+    </form>
+
+    <p>Vous pouvez ajouter une nouvelle adresse.</p>
+    <p>Attention, si trois adresses sont déjà enregistrées sur votre compte, l'une d'entre elles sera écrasée.</p>
+   <form method="post" action="index.php?page=paiment&order_id={{order.id}}">
+    <div class="mb-3">
+            <input type ="text" name="nom" placeholder="Nom">
+        </div>
+        <div class="mb-3">
+            <input type ="text" name="prenom" placeholder="Prénom">
+        </div>
+        <div class="mb-3">
+            <input type ="text" name="numNomRue" placeholder="N° et nom de la rue">
+        </div>
+        <div class="mb-3">
+            <input type ="text" name="compl" placeholder="Complement d'adresse">
+        </div>
+        <div class="mb-3">
+            <input type ="text" name="cp" placeholder="Code postal">
+        </div>
+        <div class="mb-3">
+            <input type ="text" name="ville" placeholder="Ville">
+        </div>
+        <div class="mb-3">
+            <input type ="text" name="pays" placeholder="Pays">
+        </div>
+        <input type="submit" value="Valider" class="btn btn-primary">
+    </form>
+
+{% endif %}
+
+
+{% endblock %}

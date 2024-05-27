@@ -1,0 +1,28 @@
+<nav>
+    <p>Notre offre : </p>
+    <ul class ="menu">
+	<li><a href="index.php?page=offre&id=1">Boisson</a></li>
+	<li><a href="index.php?page=offre&id=2">Biscuits</a></li>
+	<li><a href="index.php?page=offre&id=3">Fruits secs</a></li>
+	</ul>
+    <hr>
+    {% if username is defined %}
+        <p>Bonjour <b>{{ username }}</b></p>
+        <a href="index.php?page=deconnexion">Deconnexion</a>
+        <hr>
+        <a href="index.php?page=panier">Panier</a>
+    {% else %}
+        {% if usernameAdmin is defined %}
+        <p>Bonjour <b>{{ usernameAdmin }}</b></p>
+        <a href="index.php?page=gestionCommandes">Gestion des commandes</a>
+        <hr>
+        <a href="index.php?page=deconnexion">Deconnexion</a>
+        {% else %}
+            <a href="index.php?page=connexion">Connexion</a></br>
+            <a href="index.php?page=inscription">Inscription</a>
+            <hr>
+            <a href="index.php?page=panier">Panier</a>
+        {% endif %}
+    {% endif %}
+    
+</nav>

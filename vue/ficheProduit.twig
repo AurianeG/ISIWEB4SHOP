@@ -1,0 +1,82 @@
+{% extends "base.html.twig" %}
+{% block contenu %}
+
+<h1>{{produit.name}}</h1>
+
+{%set moy = moyNote['moyenne']|round(1) %}
+{%set entMoy=moyNote['moyenne']|round(0, 'floor') %}
+{%set b =5-moyNote['moyenne']|round(0, 'ceil')%}
+
+    {% if moy >= 1%}
+        {% for i in 1..entMoy%}
+            <img src="data/img/review_star.png" width=20px height=20px alt="star">
+        {% endfor %}
+    {% endif %}
+
+    {% if moyNote.demi %}
+        <img src="data/img/review_halfstar.png" width=20px height=20px alt="star">
+        {%set b =4-moyNote['moyenne']|round(0, 'floor')%}
+    {% endif %}
+
+    {% if moy <= 4 %}
+        {% for i in 1..b %}
+            <img src="data/img/review_gray.png" width=20px height=20px alt="star">
+        {% endfor %}
+    {% endif %}
+<p>{{produit.description}}</p>
+<p>{{produit.price}} €</p>
+
+<img src="data/img/{{produit.image}}" width=200px height=200px alt="img">
+
+<p> Note Moyenne : {{moyNote['moyenne'] |round(1)}}/5 ({{moyNote['nbReviews']}} notes)</p>
+<form action="index.php?page=ficheProduit&id={{ produit.id }}&ajouter_id={{ produit.id }}" method="post">
+							<select name="quantite" id="quantite">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>	
+								<option value="4">4</option>	
+								<option value="5">5</option>	
+								<option value="6">6</option>	
+								<option value="7">7</option>	
+								<option value="8">8</option>	
+								<option value="9">9</option>	
+								<option value="10">10</option>
+							</select>
+							<button type='submit' class="btn btn-primary" >
+								Acheter
+							</button>
+						</form>
+{% if username is defined %}
+    <h2> Ajouter une note et un commentaire: </h2>
+    <form action="index.php?page=ficheProduit&id={{ produit.id }}" method="get">
+        <input type="hidden" name="page" value="ficheProduit">
+        <input type="hidden" name="id" value="{{produit.id}}">
+        <input type="number" name="note" min="0" max="5" placeholder" Note entre 0 et 5">
+        </br> </br>
+        <input type="text" name="title" placeholder="Titre">
+        </br> </br>
+        <input type="textarea" name="description" placeholder="Description">
+        <input type="submit" value="Ajouter">
+    </form>
+{% endif %}
+<h2> Commentaires : </h2>
+<div class="toast-container position-static">
+    {% for review in produit.reviews %}
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="data/img/{{review.photo_user}}" class="img-fluid rounded-start" alt="Photo profil">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">{{review.title}} : {{review.stars}}/5</h5>
+                        <p class="card-text">{{review.description}}</p>
+                        <p class="card-text"><small class="text-body-secondary"> Commentaire de {{review.nom}}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

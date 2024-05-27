@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+{% block contenu %}
+
+<h1>Commande n° {{order.id}}</h1>
+<p>Client n° {{order.customer_id}}</p>
+<p>Nom du client : {{customer.forname}} {{customer.surname}}</p>
+<p>Statut : {{order.status}}</p>
+<p>Adresse de livraison : {{adresse}}</p>
+<p>Adresse email : {{customer.email}}</p>
+<p>Date : {{order.date}}</p>
+<p>Mode de paiement : {{order.payment_type}}</p>
+
+<h2>Produits :</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id produit</th>
+            <th>Quantité</th>
+            <th>Nom</th>
+            <th>Prix unitaire</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for orderItem in orderItems %}
+        <tr>
+            <td>{{ orderItem.product_id }} </td>
+            <td>{{ orderItem.quantity }}</td>
+            <td>{{ orderItem.name }}</td>
+            <td>{{ orderItem.price }} €</td>
+        </tr>
+    {% endfor %}
+    </table>
+    <p>Total : {{order.total|number_format(2,',')}} €</p>
+    {% if order.status == 2 %}
+        <form method="get" action='index.php'>
+            <div class="form-group">
+                <input type="hidden" name="page" value="detailCommande"/>
+                <input type="hidden" name="order_id" value ="{{ order.id }}"/>
+                <input type="hidden" name="status"value ="10"/>
+                <button class="btn btn-primary">Confirmer le paiment</button>
+            </div>
+        </form>
+    {% endif %}
+{% endblock %}
